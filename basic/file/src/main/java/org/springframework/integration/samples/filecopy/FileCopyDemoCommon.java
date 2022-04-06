@@ -17,9 +17,11 @@
 package org.springframework.integration.samples.filecopy;
 
 import java.io.File;
+import java.util.Objects;
 
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.context.ApplicationContext;
+import org.springframework.expression.Expression;
 import org.springframework.expression.common.LiteralExpression;
 import org.springframework.integration.file.FileReadingMessageSource;
 import org.springframework.integration.file.FileWritingMessageHandler;
@@ -35,8 +37,8 @@ public class FileCopyDemoCommon {
 
 	public static void displayDirectories(ApplicationContext context) {
 		File inDir = (File) new DirectFieldAccessor(context.getBean(FileReadingMessageSource.class)).getPropertyValue("directory");
-		LiteralExpression expression = (LiteralExpression) new DirectFieldAccessor(context.getBean(FileWritingMessageHandler.class)).getPropertyValue("destinationDirectoryExpression");
-		File outDir = new File(expression.getValue());
+		Expression expression = (LiteralExpression) new DirectFieldAccessor(context.getBean(FileWritingMessageHandler.class)).getPropertyValue("destinationDirectoryExpression");
+		File outDir = new File(Objects.requireNonNull(((LiteralExpression) expression).getValue()));
 		System.out.println("Input directory is: " + inDir.getAbsolutePath());
 		System.out.println("Output directory is: " + outDir.getAbsolutePath());
 		System.out.println("===================================================");

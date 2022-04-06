@@ -32,7 +32,10 @@ public class BinaryFileCopyTest {
 
 	@Test
 	public void testBinaryCopy() throws Exception{
-		ApplicationContext context = new ClassPathXmlApplicationContext("/META-INF/spring/integration/fileCopyDemo-binary.xml", BinaryFileCopyTest.class);
+		ApplicationContext context =
+				new ClassPathXmlApplicationContext(
+						"/META-INF/spring/integration/fileCopyDemo-binary.xml",
+						BinaryFileCopyTest.class);
 		FileCopyDemoCommon.displayDirectories(context);
 		Thread.sleep(5000);
 	}
